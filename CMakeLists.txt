@@ -7,9 +7,21 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/../floah
 include(floahVersionString)
 
 set(HEADERS
+    ${INCLUDE_DIR}/alignment.h
+    ${INCLUDE_DIR}/bbox.h
+    ${INCLUDE_DIR}/floah_error.h
+    ${INCLUDE_DIR}/length.h
+    ${INCLUDE_DIR}/margin.h
+    ${INCLUDE_DIR}/size.h
 )
 
 set(SOURCES
+    ${SRC_DIR}/alignment.cpp
+    ${SRC_DIR}/bbox.cpp
+    ${SRC_DIR}/floah_error.cpp
+    ${SRC_DIR}/length.cpp
+    ${SRC_DIR}/margin.cpp
+    ${SRC_DIR}/size.cpp
 )
 
 set(DEPS_PUBLIC
