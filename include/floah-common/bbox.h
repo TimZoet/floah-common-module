@@ -4,6 +4,7 @@
 // Standard includes.
 ////////////////////////////////////////////////////////////////
 
+#include <array>
 #include <cstdint>
 #include <limits>
 
@@ -19,6 +20,8 @@ namespace floah
         [[nodiscard]] int32_t width() const noexcept;
 
         [[nodiscard]] int32_t height() const noexcept;
+
+        [[nodiscard]] std::array<int32_t, 2> center() const noexcept;
 
         BBox& operator+=(const BBox& rhs) noexcept;
     };
