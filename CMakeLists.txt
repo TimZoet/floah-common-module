@@ -19,9 +19,6 @@ set(SOURCES
     ${SRC_DIR}/alignment.cpp
     ${SRC_DIR}/bbox.cpp
     ${SRC_DIR}/floah_error.cpp
-    ${SRC_DIR}/length.cpp
-    ${SRC_DIR}/margin.cpp
-    ${SRC_DIR}/size.cpp
 )
 
 set(DEPS_PUBLIC

@@ -4,6 +4,7 @@
 // Standard includes.
 ////////////////////////////////////////////////////////////////
 
+#include <cmath>
 #include <cstdint>
 
 namespace floah
@@ -18,29 +19,29 @@ namespace floah
         /**
          * \brief Construct an absolute length.
          */
-        Length();
+        constexpr Length() = default;
 
         /**
          * \brief Construct an absolute length.
          * \param v Absolute length.
          */
-        explicit Length(int32_t v);
+        constexpr explicit Length(const int32_t v) : absLength(v) {}
 
         /**
          * \brief Construct a relative length.
          * \param v Relative length.
          */
-        explicit Length(float v);
+        constexpr explicit Length(const float v) : relative(true), relLength(v) {}
 
-        Length(const Length&);
+        constexpr Length(const Length&) = default;
 
-        Length(Length&&) noexcept;
+        constexpr Length(Length&&) noexcept = default;
 
-        ~Length() noexcept;
+        constexpr ~Length() noexcept = default;
 
-        Length& operator=(const Length&);
+        constexpr Length& operator=(const Length&) = default;
 
-        Length& operator=(Length&&) noexcept;
+        constexpr Length& operator=(Length&&) noexcept = default;
 
         ////////////////////////////////////////////////////////////////
         // Getters.
@@ -50,32 +51,35 @@ namespace floah
          * \brief Get absolute length.
          * \return Absolute length.
          */
-        [[nodiscard]] int32_t get() const noexcept;
+        [[nodiscard]] constexpr int32_t get() const noexcept { return absLength; }
 
         /**
          * \brief Get relative length.
          * \return Relative length.
          */
-        [[nodiscard]] float getRelative() const noexcept;
+        [[nodiscard]] constexpr float getRelative() const noexcept { return relLength; }
 
         /**
          * \brief Get absolute length. If this object contains a relative length, convert it to an absolute length relative to base.
          * \param base Base length to multiply relative length with.
          * \return Absolute length.
          */
-        [[nodiscard]] int32_t get(int32_t base) const noexcept;
+        [[nodiscard]] constexpr int32_t get(int32_t base) const noexcept
+        {
+            return isRelative() ? static_cast<int32_t>(std::round(relLength * static_cast<float>(base))) : absLength;
+        }
 
         /**
          * \brief Returns whether this length is absolute.
          * \return True if absolute.
          */
-        [[nodiscard]] bool isAbsolute() const noexcept;
+        [[nodiscard]] constexpr bool isAbsolute() const noexcept { return !relative; }
 
         /**
          * \brief Returns whether this length is relative.
          * \return True if relative.
          */
-        [[nodiscard]] bool isRelative() const noexcept;
+        [[nodiscard]] constexpr bool isRelative() const noexcept { return relative; }
 
         ////////////////////////////////////////////////////////////////
         // Setters.
@@ -85,23 +89,31 @@ namespace floah
          * \brief Set absolute length.
          * \param v Absolute length.
          */
-        void set(int32_t v) noexcept;
+        constexpr void set(int32_t v) noexcept
+        {
+            absLength = v;
+            relative  = false;
+        }
 
         /**
          * \brief Set relative length.
          * \param v Relative length.
          */
-        void setRelative(float v) noexcept;
+        constexpr void setRelative(float v) noexcept
+        {
+            relLength = v;
+            relative  = true;
+        }
 
         /**
          * \brief Use absolute length value.
          */
-        void makeAbsolute() noexcept;
+        constexpr void makeAbsolute() noexcept { relative = false; }
 
         /**
          * \brief Use relative length value.
          */
-        void makeRelative() noexcept;
+        constexpr void makeRelative() noexcept { relative = true; }
 
     private:
         ////////////////////////////////////////////////////////////////

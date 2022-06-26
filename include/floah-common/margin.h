@@ -15,17 +15,17 @@ namespace floah
         // Constructors.
         ////////////////////////////////////////////////////////////////
 
-        Margin();
+        constexpr Margin() = default;
 
-        Margin(const Margin&);
+        constexpr Margin(const Margin&) = default;
 
-        Margin(Margin&&) noexcept;
+        constexpr Margin(Margin&&) noexcept = default;
 
-        ~Margin() noexcept;
+        constexpr ~Margin() noexcept = default;
 
-        Margin& operator=(const Margin&);
+        constexpr Margin& operator=(const Margin&) = default;
 
-        Margin& operator=(Margin&&) noexcept;
+        constexpr Margin& operator=(Margin&&) noexcept = default;
 
         ////////////////////////////////////////////////////////////////
         // Getters.
@@ -35,49 +35,49 @@ namespace floah
          * \brief Get left margin.
          * \return Left margin.
          */
-        [[nodiscard]] Length& getLeft() noexcept;
+        [[nodiscard]] constexpr Length& getLeft() noexcept { return left; }
 
         /**
          * \brief Get left margin.
          * \return Left margin.
          */
-        [[nodiscard]] const Length& getLeft() const noexcept;
+        [[nodiscard]] constexpr const Length& getLeft() const noexcept { return left; }
 
         /**
          * \brief Get top margin.
          * \return Top margin.
          */
-        [[nodiscard]] Length& getTop() noexcept;
+        [[nodiscard]] constexpr Length& getTop() noexcept { return top; }
 
         /**
          * \brief Get top margin.
          * \return Top margin.
          */
-        [[nodiscard]] const Length& getTop() const noexcept;
+        [[nodiscard]] constexpr const Length& getTop() const noexcept { return top; }
 
         /**
          * \brief Get right margin.
          * \return Right margin.
          */
-        [[nodiscard]] Length& getRight() noexcept;
+        [[nodiscard]] constexpr Length& getRight() noexcept { return right; }
 
         /**
          * \brief Get right margin.
          * \return Right margin.
          */
-        [[nodiscard]] const Length& getRight() const noexcept;
+        [[nodiscard]] constexpr const Length& getRight() const noexcept { return right; }
 
         /**
          * \brief Get bottom margin.
          * \return Bottom margin.
          */
-        [[nodiscard]] Length& getBottom() noexcept;
+        [[nodiscard]] constexpr Length& getBottom() noexcept { return bottom; }
 
         /**
          * \brief Get bottom margin.
          * \return Bottom margin.
          */
-        [[nodiscard]] const Length& getBottom() const noexcept;
+        [[nodiscard]] constexpr const Length& getBottom() const noexcept { return bottom; }
 
         ////////////////////////////////////////////////////////////////
         // Setters.
@@ -90,7 +90,13 @@ namespace floah
          * \param r Right.
          * \param b Bottom.
          */
-        void set(int32_t l, int32_t t, int32_t r, int32_t b) noexcept;
+        constexpr void set(const int32_t l, const int32_t t, const int32_t r, const int32_t b) noexcept
+        {
+            left.set(l);
+            top.set(t);
+            right.set(r);
+            bottom.set(b);
+        }
 
     private:
         ////////////////////////////////////////////////////////////////

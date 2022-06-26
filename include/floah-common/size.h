@@ -15,19 +15,23 @@ namespace floah
         // Constructors.
         ////////////////////////////////////////////////////////////////
 
-        Size();
+        constexpr Size() = default;
 
-        Size(Length w, Length h);
+        constexpr Size(const Length w, const Length h) : width(w), height(h) {}
 
-        Size(const Size&);
+        constexpr Size(const int32_t w, const int32_t h) : width(w), height(h) {}
 
-        Size(Size&&) noexcept;
+        constexpr Size(const float w, const float h) : width(w), height(h) {}
 
-        ~Size() noexcept;
+        constexpr Size(const Size&) = default;
 
-        Size& operator=(const Size&);
+        constexpr Size(Size&&) noexcept = default;
 
-        Size& operator=(Size&&) noexcept;
+        constexpr ~Size() noexcept = default;
+
+        constexpr Size& operator=(const Size&) = default;
+
+        constexpr Size& operator=(Size&&) noexcept = default;
 
         ////////////////////////////////////////////////////////////////
         // Getters.
@@ -37,39 +41,39 @@ namespace floah
          * \brief Get width.
          * \return Width.
          */
-        [[nodiscard]] Length& getWidth() noexcept;
+        [[nodiscard]] constexpr Length& getWidth() noexcept { return width; }
 
         /**
          * \brief Get width.
          * \return Width.
          */
-        [[nodiscard]] const Length& getWidth() const noexcept;
+        [[nodiscard]] constexpr const Length& getWidth() const noexcept { return width; }
 
         /**
          * \brief Get height.
          * \return Height.
          */
-        [[nodiscard]] Length& getHeight() noexcept;
+        [[nodiscard]] constexpr Length& getHeight() noexcept { return height; }
 
         /**
          * \brief Get height.
          * \return Height.
          */
-        [[nodiscard]] const Length& getHeight() const noexcept;
-        
+        [[nodiscard]] constexpr const Length& getHeight() const noexcept { return height; }
+
         ////////////////////////////////////////////////////////////////
         // Setters.
         ////////////////////////////////////////////////////////////////
 
-        void setWidth(Length v);
+        constexpr void setWidth(const Length v) { width = v; }
 
-        void setHeight(Length v);
+        constexpr void setHeight(const Length v) { height = v; }
 
     private:
         ////////////////////////////////////////////////////////////////
         // Member variables.
         ////////////////////////////////////////////////////////////////
-        
+
         /**
          * \brief Width.
          */
