@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////
 
 #include <cmath>
+#include <concepts>
 #include <cstdint>
 
 namespace floah
@@ -135,4 +136,16 @@ namespace floah
          */
         float relLength = 0;
     };
+
+    template<std::floating_point T>
+    [[nodiscard]] Length operator*(const Length& l, const T f)
+    {
+        return l.isAbsolute() ? Length(static_cast<int32_t>(l.get() * f)) : Length(l.getRelative() * f);
+    }
+
+    template<std::integral T>
+    [[nodiscard]] Length operator*(const Length& l, const T i)
+    {
+        return l.isAbsolute() ? Length(l.get() * static_cast<int32_t>(i)) : Length(l.getRelative() * i);
+    }
 }  // namespace floah
